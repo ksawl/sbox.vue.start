@@ -1,26 +1,27 @@
 <template>
   <div id="app">
-    <TodoList :todos="todos" @delete-todo="deleteTodo" />
+    <header>
+      <h1>SPA</h1>
+    </header>
+    <main>
+      <aside class="sidebar"></aside>
+      <aside class="content"></aside>
+    </main>
   </div>
 </template>
 
 <script>
-import TodoList from './components/TodoList'
+
 
 export default {
   name: 'App',
   data() {
     return {
-      todos: ['One', 'Two', 'Three']
+      posts: []
     }
   },
   components: {
-    TodoList
-  },
-  methods: {
-    deleteTodo(index){
-      this.todos.splice(index, 1);
-    }
+    
   }
 }
 </script>
