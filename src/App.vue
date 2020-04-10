@@ -1,46 +1,47 @@
 <template>
   <div id="app">
-    <header>
-      <h1>SPA</h1>
-    </header>
+    <Header></Header>
     <main>
-      <aside class="sidebar">
-        <div v-for="post in posts" :key="post">{{ post }}</div>
-      </aside>
-      <aside class="content"></aside>
+      <Sidebar></Sidebar>
+      <Content></Content>
     </main>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
-import GLOBAL from '@/lib/global'
+import Header from '@/components/Header'
+import Sidebar from '@/components/Sidebar'
+import Content from '@/components/Content'
 
 export default {
   name: 'App',
-  data() {
-    return {
-      posts: null
-    }
-  },
-  created() {
-    this.getAllPosts();
-  },
-  methods: {
-    getAllPosts() {
-      axios
-        .get(GLOBAL.REST_URL + 'getList')
-        .then(response => {
-          this.posts = response.data;
-        })
-        .catch(error => {
-          console.log('-----error-------');
-          console.log(error);
-        });
-    }
+  components: {
+    'Header': Header,
+    'Sidebar': Sidebar,
+    'Content': Content
   }
 }
 </script>
 
 <style>
+* {
+  margin: 0;
+  padding: 0;
+  outline: none !important;
+  box-sizing: border-box;
+  text-decoration: none !important;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  color: #131313;
+  font-family: "Gotham Pro";
+}
 </style>

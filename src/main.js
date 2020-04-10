@@ -1,8 +1,13 @@
-import App from './App.vue'
-import Vue from 'vue'
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
 
-Vue.config.productionTip = false
+import App from "./App.vue";
+import BootstrapVue from "bootstrap-vue";
+import Vue from "vue";
+
+Vue.use(BootstrapVue);
 
 new Vue({
-    render: h => h(App),
-}).$mount('#app')
+    el: "#app",
+    render: h => h(App)
+});
