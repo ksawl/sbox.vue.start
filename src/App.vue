@@ -4,28 +4,43 @@
       <h1>SPA</h1>
     </header>
     <main>
-      <aside class="sidebar"></aside>
+      <aside class="sidebar">
+        <div v-for="post in posts" :key="post">{{ post }}</div>
+      </aside>
       <aside class="content"></aside>
     </main>
   </div>
 </template>
 
 <script>
-
+import axios from 'axios'
+import GLOBAL from '@/lib/global'
 
 export default {
   name: 'App',
   data() {
     return {
-      posts: []
+      posts: null
     }
   },
-  components: {
-    
+  created() {
+    this.getAllPosts();
+  },
+  methods: {
+    getAllPosts() {
+      axios
+        .get(GLOBAL.REST_URL + 'getList')
+        .then(response => {
+          this.posts = response.data;
+        })
+        .catch(error => {
+          console.log('-----error-------');
+          console.log(error);
+        });
+    }
   }
 }
 </script>
 
 <style>
-
 </style>
