@@ -1,14 +1,19 @@
 <template>
   <div id="app">
     <Header></Header>
-    <main>
-      <Sidebar></Sidebar>
-      <Content></Content>
+    <main class="container">
+      <div class="row">
+        <Sidebar :listpages="listpages" @get-one-post="getOnePost"></Sidebar>
+        <Content :onepost="onepost"></Content>
+      </div>
     </main>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+import qs from 'qs'
+import GLOBAL from '@/components/lib/Global.js'
 import Header from '@/components/Header'
 import Sidebar from '@/components/Sidebar'
 import Content from '@/components/Content'
@@ -19,25 +24,56 @@ export default {
     'Header': Header,
     'Sidebar': Sidebar,
     'Content': Content
+  },
+  data() {
+    return {
+      listpages: this.getListPages(),
+      onepost: this.getOnePost(0)
+    }
+  },
+  methods: {
+    getOnePost(index) {
+      const options = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        data: qs.stringify({ 'id': index, 'method': 'get' }),
+        url: GLOBAL.REST_ONEPAGE
+      };
+      axios(options)
+        .then(response => {
+          if (response.data.status != 'err') {
+            this.onepost = response.data.message;
+          } else {
+            console.log('-----error-------');
+            this.onepost = response.data.message;
+          }
+          console.log(response.data.vars);
+
+        })
+        .catch(error => {
+          console.log('-----error-------');
+          console.log(error);
+        });
+      //this.listpages.splice(index, 1);
+    },
+    getListPages() {
+      axios
+        .get(GLOBAL.REST_LISTPAGES)
+        .then(response => {
+          this.listpages = response.data;
+        })
+        .catch(error => {
+          console.log('-----error-------');
+          console.log(error);
+        });
+    }
   }
 }
 </script>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  outline: none !important;
-  box-sizing: border-box;
-  text-decoration: none !important;
-}
-
 html,
 body {
-  margin: 0;
-  padding: 0;
-  min-height: 100%;
-  height: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;

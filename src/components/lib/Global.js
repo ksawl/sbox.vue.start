@@ -1,4 +1,4 @@
 export default {
-    REST_URL: "http://karaone.info/rest/",
-    b: "bar"
+    REST_LISTPAGES: "http://karaone.info/rest/listpages",
+    REST_ONEPAGE: "http://karaone.info/rest/onepage"
 };

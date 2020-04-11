@@ -1,34 +1,22 @@
 <template>
-  <aside class="sidebar">
-    <div v-for="post in posts" :key="post">{{ post }}</div>
+  <aside class="sidebar col-3">
+    <div class="row">
+      <div class="col-12"></div>
+      <div class="col-12">
+        <div v-for="(title, index) in listpages" @click="getOnePost(index)" :key="index">{{ title }}</div>
+      </div>
+    </div>
   </aside>
 </template>
 
 <script>
-import axios from 'axios'
-import GLOBAL from '@/components/lib/Global.js';
 
 export default {
   name: 'Sidebar',
-  data() {
-    return {
-      posts: null
-    }
-  },
-  created() {
-    this.getAllPosts();
-  },
+  props: ['listpages'],
   methods: {
-    getAllPosts() {
-      axios
-        .get(GLOBAL.REST_URL + 'getList')
-        .then(response => {
-          this.posts = response.data;
-        })
-        .catch(error => {
-          console.log('-----error-------');
-          console.log(error);
-        });
+    getOnePost(index) {
+      this.$emit('get-one-post', index);
     }
   }
 }
