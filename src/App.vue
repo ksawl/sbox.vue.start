@@ -1,13 +1,13 @@
 <template>
-  <div id="app">
+  <main id="app" class="h-100">
     <Header></Header>
-    <main class="container">
-      <div class="row">
-        <Sidebar :listpages="listpages" @get-one-post="getOnePost"></Sidebar>
-        <Content :onepost="onepost"></Content>
+    <section class="page-wrap container h-100">
+      <div class="row h-100">
+        <Sidebar :listpages="listpages" @get-post-index="getOnePost" @get-post-title="setTitle"></Sidebar>
+        <Content :onepost="onepost" :title="title"></Content>
       </div>
-    </main>
-  </div>
+    </section>
+  </main>
 </template>
 
 <script>
@@ -28,10 +28,14 @@ export default {
   data() {
     return {
       listpages: this.getListPages(),
-      onepost: this.getOnePost(0)
+      onepost: this.getOnePost(0),
+      title: 'Wellcome!'
     }
   },
   methods: {
+    setTitle(title) {
+      this.title = title;
+    },
     getOnePost(index) {
       const options = {
         method: 'POST',
@@ -47,7 +51,7 @@ export default {
             console.log('-----error-------');
             this.onepost = response.data.message;
           }
-          console.log(response.data.vars);
+          //console.log(response.data.vars);
 
         })
         .catch(error => {
@@ -74,10 +78,18 @@ export default {
 <style>
 html,
 body {
+  background-color: #fff;
+  height: 100%;
+  margin: 0;
+  font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem;
+  color: #304455;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-  color: #131313;
-  font-family: "Gotham Pro";
+}
+main {
+  position: relative;
+  padding-top: 40px;
 }
 </style>
