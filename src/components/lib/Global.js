@@ -1,4 +1,5 @@
 export default {
-    REST_GETTITLES: "http://karaone.btc/rest/titles",
-    REST_ONEPAGE: "http://karaone.btc/rest/onepage"
+    REST_GET_ITEMS_MENU: "http://karaone.btc/rest/menuitems",
+    REST_CONTENT: "http://karaone.btc/rest/content",
+    MAIN_PAGE_SLUG: "first"
 };

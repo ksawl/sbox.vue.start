@@ -4,8 +4,8 @@
       <div class="row">
         <div class="col-12"></div>
         <div class="col-12 title-list">
-          <div class="row" v-for="title in titles" @click="getContent(title)" :key="title.id">
-            <div class="item" :class="{ 'active': currentId == title.id }">{{ title.title }}</div>
+          <div class="row" v-for="item in itemsMenu" @click="itemGoParent(item)" :key="item.slug">
+            <div class="item" :class="{ 'active': currentItemSlug == item.slug }">{{ item.title }}</div>
           </div>
         </div>
       </div>
@@ -16,20 +16,16 @@
 <script>
 export default {
   name: 'BurgerMenu',
-  props: ['stateMenu', 'titles'],
+  props: ['stateMenu', 'itemsMenu'],
   data() {
     return {
-      currentId: 0
+      currentItemSlug: 'first'
     }
   },
   methods: {
-    menuShow() {
-      return this.stateMenu
-    },
-    getContent(title) {
-      this.currentId = title.id;
-      this.$emit('get-post-id', title.id);
-      this.$emit('get-post-title', title.title);
+    itemGoParent(item) {
+      this.currentItemSlug = item.slug;
+      this.$emit('item-menu-slug', item.slug);
       this.$emit('state-menu', this.stateMenu);
     }
   }

@@ -5,12 +5,11 @@
       <div class="row h-100 position-relative">
         <BurgerMenu
           :stateMenu="stateMenu"
-          :titles="titles"
-          @get-post-id="getContent"
-          @get-post-title="setTitle"
+          :itemsMenu="itemsMenu"
+          @item-menu-slug="getContent"
           @state-menu="changeStateMenu"
         ></BurgerMenu>
-        <Content :onepost="onepost" :title="title"></Content>
+        <Content :content="content"></Content>
       </div>
     </section>
   </main>
@@ -34,33 +33,28 @@ export default {
   },
   data() {
     return {
-      titles: this.getTitles(),
-      onepost: this.getContent(0),
-      title: 'Wellcome!',
-      stateMenu: false
+      stateMenu: false,
+      itemsMenu: this.getItemsMenu(),
+      content: this.getContent(GLOBAL.MAIN_PAGE_SLUG),
     }
   },
   methods: {
     changeStateMenu(state) {
       this.stateMenu = !state;
     },
-    setTitle(title) {
-      this.title = title;
-    },
-    getContent(id) {
+    getContent(slug) {
       const options = {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        data: qs.stringify({ 'id': id, 'method': 'get' }),
-        url: GLOBAL.REST_ONEPAGE
+        data: qs.stringify({ 'slug': slug, 'method': 'get' }),
+        url: GLOBAL.REST_CONTENT
       };
+
       axios(options)
         .then(response => {
-          if (response.data.status != 'err') {
-            this.onepost = response.data.message;
-          } else {
+          this.content = response.data.message;
+          if (response.data.status == 'err') {
             console.log('-----error-------');
-            this.onepost = response.data.message;
           }
           //console.log(response.data.vars);
 
@@ -69,13 +63,12 @@ export default {
           console.log('-----error-------');
           console.log(error);
         });
-      //this.titles.splice(index, 1);
     },
-    getTitles() {
+    getItemsMenu() {
       axios
-        .get(GLOBAL.REST_GETTITLES)
+        .get(GLOBAL.REST_GET_ITEMS_MENU)
         .then(response => {
-          this.titles = response.data;
+          this.itemsMenu = response.data;
         })
         .catch(error => {
           console.log('-----error-------');

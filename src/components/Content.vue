@@ -1,16 +1,14 @@
 <template>
   <aside class="content col-12">
-    <div class="col-12">
-      <h1>{{ title }}</h1>
-    </div>
-    <div class="col-12">{{ onepost }}</div>
+    <div class="col-12"></div>
+    <div class="col-12">{{ content }}</div>
   </aside>
 </template>
 
 <script>
 export default {
   name: 'Content',
-  props: ['onepost', 'title']
+  props: ['content']
 }
 </script>
 

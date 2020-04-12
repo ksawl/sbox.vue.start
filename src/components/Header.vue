@@ -1,7 +1,7 @@
 <template>
   <header>
     <div class="container">
-      <button class="burger" :class="{ 'active': stateMenu }" @click="showMenu">
+      <button class="burger" :class="{ 'active': stateMenu }" @click="stateGoParent">
         <div class="bar"></div>
         <div class="bar"></div>
         <div class="bar"></div>
@@ -16,7 +16,7 @@ export default {
   name: 'Header',
   props: ['stateMenu'],
   methods: {
-    showMenu() {
+    stateGoParent() {
       this.$emit('state-menu', this.stateMenu);
     }
   }
