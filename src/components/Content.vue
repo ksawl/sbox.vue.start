@@ -1,5 +1,5 @@
 <template>
-  <aside class="content col-9">
+  <aside class="content col-12">
     <div class="col-12">
       <h1>{{ title }}</h1>
     </div>
@@ -17,5 +17,9 @@ export default {
 <style>
 h1 {
   margin-top: 25px;
+}
+.content {
+  background-color: #fff;
+  padding-bottom: 25px;
 }
 </style>
