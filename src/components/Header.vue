@@ -18,12 +18,10 @@
 </template>
 
 <script>
-import buttonBurger from '@/components/lib/elem/Button'
-
 export default {
   name: 'Header',
   components: {
-    buttonBurger
+    buttonBurger: () => import('@/components/lib/elem/Button')
   },
   props: ['stateMenu'],
   data() {
