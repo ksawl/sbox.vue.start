@@ -27,9 +27,9 @@ import Content from '@/components/Content'
 export default {
   name: 'App',
   components: {
-    'Header': Header,
-    'BurgerMenu': BurgerMenu,
-    'Content': Content
+    Header,
+    BurgerMenu,
+    Content
   },
   data() {
     return {
