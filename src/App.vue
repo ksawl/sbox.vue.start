@@ -20,16 +20,12 @@ import axios from 'axios'
 import qs from 'qs'
 import GLOBAL from '@/components/lib/Global.js'
 
-import Header from '@/components/Header'
-import BurgerMenu from '@/components/BurgerMenu'
-import Content from '@/components/Content'
-
 export default {
   name: 'App',
   components: {
-    'Header': Header,
-    'BurgerMenu': BurgerMenu,
-    'Content': Content
+    Header: () => import('@/components/Header'),
+    BurgerMenu: () => import('@/components/BurgerMenu'),
+    Content: () => import('@/components/Content')
   },
   data() {
     return {

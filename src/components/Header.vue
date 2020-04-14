@@ -1,11 +1,17 @@
 <template>
   <header>
     <div class="container">
-      <button class="burger" :class="{ 'active': stateMenu }" @click="stateGoParent">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-      </button>
+      <buttonBurger
+        :classButton="classMenu"
+        :stateButton="stateMenu"
+        @state-button="stateMenuGoParent"
+      >
+        <span slot="inner">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </span>
+      </buttonBurger>
       <h1>SPA</h1>
     </div>
   </header>
@@ -14,9 +20,16 @@
 <script>
 export default {
   name: 'Header',
+  components: {
+    buttonBurger: () => import('@/components/lib/elem/Button')
+  },
   props: ['stateMenu'],
+  data() {
+    return { classMenu: 'burger' }
+  },
   methods: {
-    stateGoParent() {
+    stateMenuGoParent(state) {
+      this.stateMenu = state;
       this.$emit('state-menu', this.stateMenu);
     }
   }
