@@ -1,4 +1,11 @@
-# startcdl
+# Vue start project
+Функциональность:
+- библиотека для Markdown документов
+
+Работы по проекту
+- разбить на абстрактные модули DB, Storage, routing, components &ets.
+- заменить bootstrap на что то получше)
+- выпилить jquery
 
 ## Project setup
 ```
